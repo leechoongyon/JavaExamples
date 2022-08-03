@@ -3,7 +3,16 @@ package org.example.pattern.factory;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-public class FactoryPatternExample {
+import java.util.HashMap;
+import java.util.Map;
+
+public class FactoryPatternRefactoringExample {
+
+    private static Map<SportTypeCd, Sport> map = new HashMap<>();
+    static {
+        map.put(SportTypeCd.SOCCER, new Soccer());
+        map.put(SportTypeCd.BASEBALL, new Baseball());
+    }
 
     public static void main(String[] args) {
         Sport sport = getSport(SportTypeCd.SOCCER);
@@ -11,13 +20,7 @@ public class FactoryPatternExample {
     }
 
     public static Sport getSport(SportTypeCd sportTypeCd) {
-        if (SportTypeCd.BASEBALL.equals(sportTypeCd)) {
-            return new Baseball();
-        } else if (SportTypeCd.SOCCER.equals(sportTypeCd)) {
-            return new Soccer();
-        } else {
-            throw new IllegalArgumentException(String.format("invalid sportTypeCd : ", sportTypeCd));
-        }
+        return map.get(sportTypeCd);
     }
 
 
@@ -31,5 +34,4 @@ public class FactoryPatternExample {
         private final String code;
         private final String desc;
     }
-
 }
