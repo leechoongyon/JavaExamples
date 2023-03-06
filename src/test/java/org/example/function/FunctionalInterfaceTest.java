@@ -1,5 +1,6 @@
 package org.example.function;
 
+import java.util.function.BiPredicate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +42,14 @@ public class FunctionalInterfaceTest {
         Assertions.assertEquals(true, isEqualsHelloWorld.test("Hello World"));
         Predicate<String> isNotEqualsHelloWorld = isEqualsHelloWorld.negate();
         Assertions.assertEquals(true, isNotEqualsHelloWorld.test("Hello..."));
+    }
+
+    @Test
+    void biPredicateFunctionalInterfaceTest() {
+        BiPredicate<String, String> biPredicate = (x, y) -> {
+            return x.equals(y);
+        };
+        Assertions.assertEquals(true, biPredicate.test("Hello World", "Hello World"));
     }
 
     public interface FunctionalInterfaceSample {
